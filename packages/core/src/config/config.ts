@@ -2,6 +2,7 @@ import type { AbiEvent } from "abitype";
 import { build } from "esbuild";
 import { existsSync, rmSync } from "node:fs";
 import path from "node:path";
+import { Transport } from "viem";
 
 import { ensureDirExists } from "@/utils/exists";
 
@@ -26,6 +27,10 @@ export type ResolvedConfig = {
     chainId: number;
     /** RPC URL. Default: if available, a public RPC provider. */
     rpcUrl?: string;
+    /** Custom viem transport: https://viem.sh/docs/clients/transports/http.html
+     * If `undefined`, a default transport will be used based on `rpcUrl`.
+     */
+    transport?: Transport;
     /** Polling frequency (in ms). Default: `1_000`. */
     pollingInterval?: number;
     /** Maximum concurrency of RPC requests during the historical sync. Default: `10`. */
